@@ -18,8 +18,8 @@ class CreateQuestionsTable extends Migration
             $table->string('title');
             $table->string('slug');
             $table->text('body');
-            $table->integer('category_ig')->unsigned();
-            $table->integer('user_ig')->unsigned();
+            $table->integer('category_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
         });
     }
