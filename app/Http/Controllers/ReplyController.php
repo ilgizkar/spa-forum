@@ -10,6 +10,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ReplyController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('JWT', ['except' => ['index', 'show']]);
+    }
+
     public function index(Question $question)
     {
         return ReplyResource::collection(Reply::where('question_id', $question->id)->latest()->get());
