@@ -8,8 +8,8 @@ import router from './router/router'
 // Vue.component('AppHome', require('./components/AppHome.vue'));
 
 import User from './helpers/User'
-window.User = User
-console.log(User.id())
+window.User = User;
+window.EventBus = new Vue();
 
 
 const app = new Vue({

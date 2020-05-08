@@ -5,7 +5,10 @@ class User {
 
     login(form) {
         axios.post('/api/auth/login', form)
-            .then(res => this.responseAfterLogin(res))
+            .then(res => {
+                this.responseAfterLogin(res);
+                window.location = '/forum'
+            })
             .catch(error => console.log(error.response.data))
     }
 
@@ -29,8 +32,9 @@ class User {
         return this.hasToken()
     }
 
-    loggout() {
-        AppStorage.clear()
+    logout() {
+        AppStorage.clear();
+        window.location = '/forum'
     }
 
     name() {
