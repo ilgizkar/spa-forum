@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Str;
 
 class QuestionResource extends JsonResource
 {
@@ -16,10 +17,12 @@ class QuestionResource extends JsonResource
     {
         return [
             'title' => $this->title,
-            'slug' =>  $this->path,
+            'path' =>  $this->path,
             'body' => $this->body,
             'created_at' => $this->created_at->diffForHumans(),
-            'user' => $this->user->name
+            'user' => $this->user->name,
+            'id' => $this->user_id,
+            'slug' => Str::slug($this->title),
         ];
     }
 }
