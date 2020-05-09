@@ -1,6 +1,6 @@
 <template>
     <v-card
-        max-width="400"
+        class="mt-4"
     >
         <v-card-title primary-title>
             <div>

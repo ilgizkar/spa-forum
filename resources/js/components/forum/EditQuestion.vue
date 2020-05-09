@@ -44,18 +44,19 @@
             return {
                 errors: {},
                 form: {
-                    title: '',
-                    body: ''
+                    title: this.data.title,
+                    body: this.data.body
                 }
             }
         },
-        created() {
-            this.form = this.data
-        },
         methods: {
             update() {
-                axios.patch(`/api/question/${this.form.slug}`, this.form)
-                    .then(res => this.back())
+                axios.patch(`/api/question/${this.data.slug}`, this.form)
+                    .then(res => {
+                        this.back();
+                        this.data.title = this.form.title;
+                        this.data.body = this.form.body;
+                    })
                     .catch(error => this.errors = error.response.data)
             },
             back() {

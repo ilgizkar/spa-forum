@@ -6,13 +6,15 @@
                     <div class="headline">
                         {{ data.title }}
                     </div>
-                    <span class="grey--text">
-                    от {{ data.user }}, {{ data.created_at }}
-                    </span>
                 </div>
                 <v-spacer></v-spacer>
-                <v-btn color="success">5 ответов</v-btn>
+                <v-btn color="success">{{ data.reply_count }} ответов</v-btn>
             </v-card-title>
+            <v-card-subtitle>
+               <span class="grey--text">
+                    {{ data.user }}, {{ data.created_at }}
+               </span>
+            </v-card-subtitle>
 
             <v-card-text v-html="body"></v-card-text>
             <v-card-actions v-if="own">

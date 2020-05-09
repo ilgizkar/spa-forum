@@ -25,7 +25,7 @@
                 items: [
                     {title:'Форум', to:'/forum', show:true},
                     {title:'Задать вопрос', to:'/ask', show:User.loggedIn()},
-                    {title:'Категории', to:'/category', show:User.loggedIn()},
+                    {title:'Категории', to:'/category', show:User.admin()},
                     {title:'Войти', to:'/login', show:!User.loggedIn()},
                     {title:'Выйти', to:'/logout', show:User.loggedIn()},
                 ]

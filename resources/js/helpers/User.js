@@ -38,13 +38,13 @@ class User {
     }
 
     name() {
-        if(this.loggedIn) {
+        if(this.loggedIn()) {
             return AppStorage.getUser()
         }
     }
 
     id() {
-        if(this.loggedIn) {
+        if(this.loggedIn()) {
             const payload = Token.payload(AppStorage.getToken());
             return payload.sub
         }
@@ -52,6 +52,10 @@ class User {
 
     own(id) {
         return this.id() == id
+    }
+
+    admin() {
+        return this.id() == 21
     }
 
 }
