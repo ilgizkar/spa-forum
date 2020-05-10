@@ -3,6 +3,7 @@
 <!--    <v-app-bar-nav-icon></v-app-bar-nav-icon>-->
         <v-toolbar-title>SPA Форум</v-toolbar-title>
         <v-spacer></v-spacer>
+        <app-notification v-if="loggedIn"></app-notification>
         <div class="hidden-sm-and-down">
 
             <router-link
@@ -19,9 +20,12 @@
 </template>
 
 <script>
+    import AppNotification from "./AppNotification";
     export default {
+        components: {AppNotification},
         data() {
             return {
+                loggedIn: User.loggedIn(),
                 items: [
                     {title:'Форум', to:'/forum', show:true},
                     {title:'Задать вопрос', to:'/ask', show:User.loggedIn()},
