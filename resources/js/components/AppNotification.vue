@@ -16,13 +16,13 @@
                         <v-list-item-title @click="readNoti(item)">{{ item.question }}</v-list-item-title>
                     </router-link>
                 </v-list-item>
-                <v-list-item
-                    v-for="(item, index) in read"
-                    :key="index"
-                    @click=""
-                >
-                    <v-list-item-title>{{ item.question }}</v-list-item-title>
-                </v-list-item>
+<!--                <v-list-item-->
+<!--                    v-for="(item, index) in read"-->
+<!--                    :key="index"-->
+<!--                    @click=""-->
+<!--                >-->
+<!--                    <v-list-item-title>{{ item.question }}</v-list-item-title>-->
+<!--                </v-list-item>-->
             </v-list>
         </v-menu>
     </div>
@@ -46,6 +46,12 @@
             if(User.loggedIn()) {
                 this.getNotifications()
             }
+
+            Echo.private('App.User.' + User.id())
+                .notification((notification) => {
+                    this.unread.unshift(notification)
+                    this.unreadCount++
+                });
         },
         methods: {
             getNotifications() {

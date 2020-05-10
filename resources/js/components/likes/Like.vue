@@ -26,6 +26,14 @@
                 count: this.reply.like_count,
             }
         },
+        created() {
+            Echo.channel('LikeChannel')
+                .listen('LikeEvent', (e) => {
+                    if(this.reply.id == e.id) {
+                        e.type == 1 ? this.count++ : this.count--
+                    }
+                });
+        },
         methods: {
             like() {
                 if(User.loggedIn()) {
