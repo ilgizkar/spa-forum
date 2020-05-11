@@ -6,7 +6,7 @@
                     <v-icon v-on="on" :color="color">mdi-bell</v-icon>{{ unreadCount }}
                 </v-btn>
             </template>
-            <v-list v-if="unread">
+            <v-list v-if="unreadCount > 0">
                 <v-list-item
                     v-for="(item, index) in unread"
                     :key="index"
