@@ -19,7 +19,7 @@ class QuestionController extends Controller
 
     public function index()
     {
-        return QuestionResource::collection(Question::latest()->paginate(5));
+        return QuestionResource::collection(Question::latest()->paginate(4));
     }
 
     public function store(QuestionRequest $request)
@@ -48,5 +48,10 @@ class QuestionController extends Controller
         $question->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
+    }
+
+    public function getCategory($id)
+    {
+        return QuestionResource::collection(Question::where('category_id', $id)->paginate(4));
     }
 }

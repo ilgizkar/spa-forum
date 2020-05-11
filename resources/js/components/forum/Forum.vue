@@ -10,10 +10,12 @@
                     ></question>
                     <div class="text-xs-center">
                         <v-pagination
+                            v-if="pagiCount"
                             v-model="meta.current_page"
                             :length="pagiCount"
                             @input="changePage"
                         ></v-pagination>
+                        <div v-else>Пока нет вопросов</div>
                     </div>
                 </v-flex>
                 <v-flex pa-4>
@@ -49,17 +51,32 @@
 
             axios.get('/api/question')
                 .then(res => {
-                    this.questions = res.data.data
-                    this.meta = res.data.meta
+                    this.questions = res.data.data;
+                    this.meta = res.data.meta;
                     this.pagiCount = Math.ceil(this.meta.total/this.meta.to);
-                    this.visible = true
+                    this.visible = true;
                     NProgress.done()
                 })
-                .catch(error => console.log(error.response.data))
+                .catch(error => console.log(error.response.data));
+
+            this.listen()
         },
         methods: {
+            listen() {
+                EventBus.$on('getCategory', (id) => {
+                    NProgress.start();
+                    axios.get(`/api/question/category/${id}`)
+                        .then(res => {
+                            this.questions = res.data.data
+                            this.meta = res.data.meta
+                            this.pagiCount = Math.ceil(this.meta.total/this.meta.to);
+                            NProgress.done()
+                        })
+                        .catch(error => console.log(error.response.data))
+                });
+            },
             changePage(page) {
-                NProgress.start()
+                NProgress.start();
                 axios.get(`/api/question?page=${page}`)
                     .then(res => {
                         this.questions = res.data.data

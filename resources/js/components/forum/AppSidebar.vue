@@ -11,7 +11,7 @@
                     :key="category.id"
                 >
                     <v-list-item-content>
-                        <v-list-item-title v-text="category.name" class="grey--text"></v-list-item-title>
+                        <v-list-item-title @click="getCategory(category.id)" v-text="category.name" class="grey--text"></v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
             </v-list-item-group>
@@ -39,6 +39,11 @@
                     this.visible = true
                 })
         },
+        methods: {
+            getCategory(id) {
+                EventBus.$emit('getCategory', id)
+            }
+        }
     }
 </script>
 

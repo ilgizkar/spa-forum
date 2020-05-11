@@ -1,6 +1,7 @@
 <?php
 
 Route::apiResource('/question', 'QuestionController');
+Route::get('/question/category/{id}', 'QuestionController@getCategory');
 
 Route::apiResource('/category', 'CategoryController');
 
