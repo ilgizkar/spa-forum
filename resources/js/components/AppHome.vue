@@ -2,10 +2,8 @@
     <v-app>
         <v-content>
             <toolbar></toolbar>
-            <v-container>
                 <router-view></router-view>
-            </v-container>
-            <app-footer></app-footer>
+<!--            <app-footer></app-footer>-->
         </v-content>
     </v-app>
 </template>

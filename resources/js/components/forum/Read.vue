@@ -10,7 +10,7 @@
         ></show-question>
         <v-container>
             <replies :question="question"></replies>
-            <new-reply :questionSlug="question.slug"></new-reply>
+            <new-reply v-if="loggedIn" :questionSlug="question.slug"></new-reply>
         </v-container>
     </div>
 </template>
@@ -27,6 +27,11 @@
               question: '',
               editing: false
           }
+        },
+        computed: {
+            loggedIn() {
+                return User.loggedIn()
+            }
         },
         created() {
             this.listen()

@@ -4,7 +4,7 @@
             <v-card-title>
                 <div class="headlin">{{ data.user }}</div>
                 <v-spacer></v-spacer>
-                <like :reply="data"></like>
+                <like v-if="loggedIn" :reply="data"></like>
             </v-card-title>
             <v-card-subtitle>
                 <div>{{ data.created_at }}</div>
@@ -39,10 +39,13 @@
         },
         computed: {
             own() {
-                return User.own(this.data.user_id) || User.admin()
+                return User.own(this.data.user_id)
             },
             reply() {
                 return md.parse(this.data.reply)
+            },
+            loggedIn() {
+                return User.loggedIn()
             }
         },
         created() {

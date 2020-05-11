@@ -7,6 +7,13 @@
                 :key="question.path"
                 :data=question
                 ></question>
+                <div class="text-xs-center">
+                    <v-pagination
+                        v-model="meta.current_page"
+                        :length="pagiCount"
+                        @input="changePage"
+                    ></v-pagination>
+                </div>
             </v-flex>
             <v-flex pa-4>
                 <app-sidebar></app-sidebar>
@@ -22,13 +29,30 @@
         components: {question, AppSidebar},
         data() {
             return {
-                questions: []
+                questions: [],
+                meta: {},
+                pagiCount: 1
             }
         },
         created() {
+
             axios.get('/api/question')
-                .then(res => this.questions = res.data.data)
+                .then(res => {
+                    this.questions = res.data.data
+                    this.meta = res.data.meta
+                    this.pagiCount = Math.ceil(this.meta.total/this.meta.to);
+                })
                 .catch(error => console.log(error.response.data))
+        },
+        methods: {
+            changePage(page) {
+                axios.get(`/api/question?page=${page}`)
+                    .then(res => {
+                        this.questions = res.data.data
+                        this.meta = res.data.meta
+                    })
+                    .catch(error => console.log(error.response.data))
+            }
         }
     }
 </script>

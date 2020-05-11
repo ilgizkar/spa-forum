@@ -1,5 +1,8 @@
 <template>
     <div>
+        <v-alert v-if="errors" type="error" :value="true">
+            Поле не должно быть пустым!
+        </v-alert>
         <vue-simplemde v-model="content" ref="markdownEditor" />
         <v-btn
             @click.prevent="save"
@@ -19,7 +22,8 @@
         props: ['body'],
         data() {
             return {
-                content: this.body.reply
+                content: this.body.reply,
+                errors: ''
             }
         },
         methods:{
@@ -32,6 +36,7 @@
                         this.body.reply = this.content;
                         this.hide();
                     })
+                    .catch(error => this.errors = error.response.data)
             }
         }
     }

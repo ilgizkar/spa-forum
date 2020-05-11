@@ -1,5 +1,8 @@
 <template>
     <div>
+        <v-alert v-if="errors" type="error" :value="true">
+            Поле категории обязательно для заполнения!
+        </v-alert>
         <v-form @submit.prevent="create">
             <v-toolbar
                 color="grey"
@@ -25,6 +28,7 @@
                     color="success"
                     class="mr-4"
                     type="submit"
+                    :disabled="disabled"
                 >
                     Сохранить
                 </v-btn>
@@ -71,7 +75,12 @@
                 },
                 categories: [],
                 editSlug: null,
-                errors: {}
+                errors: ''
+            }
+        },
+        computed: {
+            disabled() {
+                return !(this.form.name)
             }
         },
         created() {
@@ -91,7 +100,7 @@
                         this.categories.unshift(res.data)
                         this.form.name = ''
                     })
-                    .catch(error => this.errors = error.response.data)
+                    .catch(error => this.errors = error.response.data.errors)
             },
             newCat() {
                 axios.post('/api/category', this.form)
@@ -99,7 +108,7 @@
                         this.categories.unshift(res.data)
                         this.form.name = ''
                     })
-                    .catch(error => this.errors = error.response.data)
+                    .catch(error => this.errors = error.response.data.errors)
             },
             update(category, index) {
                 this.form.name = category.name;

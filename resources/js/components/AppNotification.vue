@@ -3,7 +3,7 @@
         <v-menu offset-y>
             <template v-slot:activator="{ on }">
                 <v-btn icon>
-                    <v-icon v-on="on" :color="color">mdi-bell-plus</v-icon>{{ unreadCount }}
+                    <v-icon v-on="on" :color="color">mdi-bell</v-icon>{{ unreadCount }}
                 </v-btn>
             </template>
             <v-list>
@@ -61,6 +61,7 @@
                         this.unread = res.data.unread;
                         this.unreadCount = res.data.unread.length > 0 ? res.data.unread.length : '';
                     })
+                    .catch(error => Exception.handle(error))
             },
             readNoti(noti) {
                 axios.post('/api/markAsRead', {id: noti.id})

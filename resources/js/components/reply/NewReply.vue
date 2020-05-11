@@ -1,5 +1,8 @@
 <template>
     <div class="mt-4">
+        <v-alert v-if="errors" type="error" :value="true">
+            Поле не должно быть пустым!
+        </v-alert>
         <vue-simplemde v-model="body" ref="markdownEditor" />
         <v-btn
             @click.prevent="send"
@@ -14,7 +17,8 @@
         props: ['questionSlug'],
         data() {
             return {
-                 body: ''
+                 body: '',
+                errors: ''
             }
         },
         methods: {
@@ -25,6 +29,7 @@
                         EventBus.$emit('newReply', res.data.reply);
                         window.scrollTo(0,0)
                     })
+                    .catch(error => this.errors = error.response.data)
             }
         }
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryRequest;
 use App\Http\Resources\CategoryResource;
 use App\Model\Category;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class CategoryController extends Controller
         return CategoryResource::collection(Category::latest()->get());
     }
 
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
         $category = new Category();
         $category->name = $request->name;

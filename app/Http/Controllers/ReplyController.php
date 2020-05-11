@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReplyRequest;
 use App\Events\DeleteReply;
 use App\Http\Resources\ReplyResource;
 use App\Model\Question;
@@ -22,7 +23,7 @@ class ReplyController extends Controller
         return ReplyResource::collection(Reply::where('question_id', $question->id)->latest()->get());
     }
 
-    public function store(Question $question, Request $request)
+    public function store(Question $question, ReplyRequest $request)
     {
         $request['user_id'] = auth()->id();
         $reply = $question->replies()->create($request->all());
@@ -39,7 +40,7 @@ class ReplyController extends Controller
         return new ReplyResource($reply);
     }
 
-    public function update(Question $question, Request $request, Reply $reply)
+    public function update(Question $question, ReplyRequest $request, Reply $reply)
     {
         $reply->update($request->all());
 
