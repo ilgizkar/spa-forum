@@ -20,7 +20,7 @@ const routes = [
     { path: '/forum', component: Forum, name: 'forum'},
     { path: '/question/:slug', component: Read, name: 'read'},
     { path: '/ask', component: Create},
-    { path: '/category', component: CreateCategory},
+    { path: '/category', component: CreateCategory, name: 'category'},
 ];
 
 
@@ -29,6 +29,17 @@ const router = new VueRouter({
     hashbang: false,
     mode: 'history'
 });
+
+router.beforeResolve((to, from, next) => {
+    if (to.name) {
+        NProgress.start()
+    }
+    next()
+});
+
+// router.afterEach((to, from) => {
+//     NProgress.done()
+// });
 
 
 export default router

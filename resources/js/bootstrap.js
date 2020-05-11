@@ -20,6 +20,7 @@ try {
  */
 
 window.axios = require('axios');
+
 const JwtToken = `Bearer ${localStorage.getItem('token')}`;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

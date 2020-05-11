@@ -39,7 +39,7 @@
         },
         computed: {
             color() {
-                return this.unreadCount > 0 ? 'red' : 'red lighten-4';
+                return this.unreadCount > 0 ? 'red' : '';
             }
         },
         created() {

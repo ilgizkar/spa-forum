@@ -5,6 +5,24 @@
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <app-notification v-if="loggedIn"></app-notification>
+        <div class="hidden-sm-and-up ml-3">
+            <div class="text-center">
+                <v-menu offset-y>
+                    <template v-slot:activator="{ on }">
+                        <v-app-bar-nav-icon v-on="on"></v-app-bar-nav-icon>
+                    </template>
+                    <v-list>
+                        <v-list-item  v-for="item in items" v-if="item.show" :key="item.title">
+                            <router-link
+                                :to="item.to"
+                            >
+                                <v-btn text>{{ item.title }}</v-btn>
+                            </router-link>
+                        </v-list-item>
+                    </v-list>
+                </v-menu>
+            </div>
+        </div>
         <div class="hidden-sm-and-down">
 
             <router-link

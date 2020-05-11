@@ -8,8 +8,8 @@
             column
             justify-center
         >
-            <h1 class="display-4 font-weight-thin mb-3">SPA Форум</h1>
-            <h4 class="headline">by ilgiz</h4>
+            <h1 class="display-3 font-weight-thin">SPA Форум</h1>
+            <h4 class="headline mt-8">by ilgiz</h4>
         </v-layout>
     </v-parallax>
 </template>
